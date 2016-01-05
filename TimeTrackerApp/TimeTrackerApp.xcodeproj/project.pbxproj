@@ -14,6 +14,10 @@
 		E380D3F61C3C0133003FBA38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E380D3F51C3C0133003FBA38 /* Assets.xcassets */; };
 		E380D3F91C3C0133003FBA38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E380D3F71C3C0133003FBA38 /* LaunchScreen.storyboard */; };
 		E380D4041C3C0133003FBA38 /* TimeTrackerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E380D4031C3C0133003FBA38 /* TimeTrackerAppTests.swift */; };
+		E380D40F1C3C2161003FBA38 /* TimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E380D40E1C3C2161003FBA38 /* TimeController.swift */; };
+		E380D4111C3C259B003FBA38 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E380D4101C3C259B003FBA38 /* DataController.swift */; };
+		E380D4131C3C2A42003FBA38 /* TimeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E380D4121C3C2A42003FBA38 /* TimeControllerTests.swift */; };
+		E380D4151C3C2A58003FBA38 /* DataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E380D4141C3C2A58003FBA38 /* DataControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		E380D3FF1C3C0133003FBA38 /* TimeTrackerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimeTrackerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E380D4031C3C0133003FBA38 /* TimeTrackerAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerAppTests.swift; sourceTree = "<group>"; };
 		E380D4051C3C0133003FBA38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E380D40E1C3C2161003FBA38 /* TimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeController.swift; sourceTree = "<group>"; };
+		E380D4101C3C259B003FBA38 /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		E380D4121C3C2A42003FBA38 /* TimeControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeControllerTests.swift; sourceTree = "<group>"; };
+		E380D4141C3C2A58003FBA38 /* DataControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				E380D3EB1C3C0133003FBA38 /* AppDelegate.swift */,
+				E380D4101C3C259B003FBA38 /* DataController.swift */,
 				E380D3ED1C3C0133003FBA38 /* ViewController.swift */,
+				E380D40E1C3C2161003FBA38 /* TimeController.swift */,
 				E380D3EF1C3C0133003FBA38 /* Main.storyboard */,
 				E380D3F51C3C0133003FBA38 /* Assets.xcassets */,
 				E380D3F71C3C0133003FBA38 /* LaunchScreen.storyboard */,
@@ -95,6 +105,8 @@
 			children = (
 				E380D4031C3C0133003FBA38 /* TimeTrackerAppTests.swift */,
 				E380D4051C3C0133003FBA38 /* Info.plist */,
+				E380D4121C3C2A42003FBA38 /* TimeControllerTests.swift */,
+				E380D4141C3C2A58003FBA38 /* DataControllerTests.swift */,
 			);
 			path = TimeTrackerAppTests;
 			sourceTree = "<group>";
@@ -202,8 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E380D4111C3C259B003FBA38 /* DataController.swift in Sources */,
 				E380D3EE1C3C0133003FBA38 /* ViewController.swift in Sources */,
 				E380D3EC1C3C0133003FBA38 /* AppDelegate.swift in Sources */,
+				E380D40F1C3C2161003FBA38 /* TimeController.swift in Sources */,
 				E380D3F41C3C0133003FBA38 /* TimeTrackerApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +226,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E380D4131C3C2A42003FBA38 /* TimeControllerTests.swift in Sources */,
+				E380D4151C3C2A58003FBA38 /* DataControllerTests.swift in Sources */,
 				E380D4041C3C0133003FBA38 /* TimeTrackerAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
