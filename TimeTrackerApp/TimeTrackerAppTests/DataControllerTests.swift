@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TimeTrackerApp
+@testable import TimeTrackerKit
 
 class DataControllerTests: XCTestCase {
 
@@ -27,8 +27,24 @@ class DataControllerTests: XCTestCase {
     }
 	
 	func testPersistency() {
-		var dc: DataController! = DataController()
+		let arrived = NSDate()//.timeIntervalSince1970
 		
+		var dc: DataController! = DataController()
+		dc.timeArrived = arrived
+		
+		//dc = nil
+		dc = DataController()
+		
+		//let expectation = expectationWithDescription("sync")
+		
+		/*dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * 0.5)), dispatch_get_main_queue()) { () -> Void in
+			expectation.fulfill()
+		}*/
+		
+		/*waitForExpectationsWithTimeout(1.0) { error in
+			
+		}*/
+		XCTAssertEqual(dc.timeArrived, arrived)
 	}
 
     func testPerformanceExample() {

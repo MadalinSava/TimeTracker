@@ -1,0 +1,21 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+use_frameworks!
+
+target 'TimeTrackerKitTests' do
+	pod 'PureLayout'
+end 
+
+target 'TimeTrackerApp' do
+	pod 'PureLayout'
+end
+
+target 'TimeTrackerToday' do
+	#pod 'PureLayout'
+end
+
+target 'TimeTrackerKit' do
+	pod 'PureLayout'
+end
+

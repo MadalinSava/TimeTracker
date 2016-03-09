@@ -9,9 +9,34 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TimeTrackerKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>TimeTrackerToday.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E34A42FA1C3D6021001CA731</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E34A43131C3D6E81001CA731</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E34A431C1C3D6E81001CA731</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E380D3E71C3C0132003FBA38</key>
 		<dict>
 			<key>primary</key>
