@@ -1,35 +1,8 @@
 syntax: glob
 
-####### External repositories (yarn clone:...)
-api-proxy-spec/
-swagger-codegen/
-fastlane_plugins/
-
 ####### Mac OS X
 **/*DS_Store
 
-####### AppCode
-.idea/
-
-####### VSCode
-.vscode/
-
-####### Scripts
-tmp/
-scripts/ci/cache
-
-####### Fastlane
-fastlane/report.xml
-fastlane/README.md
-
-####### Yarn
-yarn.lock
-.yarn-integrity
-
-# Due to a bug in git-lfs, when you track a file inside a module (`cd module && git lfs track file`)
-# and you're using a relative path in core.hooksPath, the track command always copies
-# again all the scripts to the module dir
-*/scripts/githooks
-
 # Xcode stuff
-**/*.xcuserstate
+**/xcuserdata/*
+**/xcshareddata/*
