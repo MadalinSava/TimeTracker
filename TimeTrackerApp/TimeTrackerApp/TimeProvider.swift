@@ -13,16 +13,16 @@ public protocol PTimeProvider: class {
 
 protocol PTimeProviderInternal: PTimeProvider {
 	func getCurrentDay() -> Int
-	func getCurrentTime() -> NSDate
+	func getCurrentTime() -> Date
 }
 
 public class TimeProvider: PTimeProviderInternal {
 	func getCurrentDay() -> Int {
-		return NSCalendar.currentCalendar().component(.Day, fromDate: NSDate())
+		return Calendar.current.component(.day, from: Date())
 	}
 	
-	func getCurrentTime() -> NSDate {
-		return NSDate()
+	func getCurrentTime() -> Date {
+		return Date()
 	}
 	
 	public init() {

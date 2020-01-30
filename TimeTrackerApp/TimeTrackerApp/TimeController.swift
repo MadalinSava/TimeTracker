@@ -14,7 +14,7 @@ public class TimeController {
 		return dataController.isOutside
 	}
 	
-	public private(set) var prevBalance: NSTimeInterval
+	public private(set) var prevBalance: TimeInterval
 	
 	private let dataController: PDataControllerInternal
 	private let timeProvider: PTimeProviderInternal
@@ -29,10 +29,10 @@ public class TimeController {
 		} else if dataController.lastDay < currentDay {
 			dataController.totalTime += dataController.timeForToday
 			dataController.timeForToday = 0
-			prevBalance = dataController.totalTime - NSTimeInterval(dataController.numDays) * eightHours
+			prevBalance = dataController.totalTime - TimeInterval(dataController.numDays) * eightHours
 			
 			dataController.lastDay = currentDay
-			dataController.numDays++
+			dataController.numDays += 1
 		}
 		
 		dataController.timeArrived = timeProvider.getCurrentTime()
@@ -41,7 +41,7 @@ public class TimeController {
 	}
 	
 	public func exit() {
-		dataController.timeForToday += timeProvider.getCurrentTime().timeIntervalSinceDate(dataController.timeArrived)
+		dataController.timeForToday += timeProvider.getCurrentTime().timeIntervalSince(dataController.timeArrived)
 		
 		dataController.isOutside = true
 	}
@@ -50,18 +50,18 @@ public class TimeController {
 		dataController.reload()
 	}
 	
-	public func getFullTime() -> NSDate {
-		return dataController.timeArrived.dateByAddingTimeInterval(eightHours - dataController.timeForToday - prevBalance)
+	public func getFullTime() -> Date {
+		return dataController.timeArrived.addingTimeInterval(eightHours - dataController.timeForToday - prevBalance)
 	}
 	
-	public func getRegularTime() -> NSDate {
-		return dataController.timeArrived.dateByAddingTimeInterval(eightHours - dataController.timeForToday)
+	public func getRegularTime() -> Date {
+		return dataController.timeArrived.addingTimeInterval(eightHours - dataController.timeForToday)
 	}
 	
-	public func getTodayBalance() -> NSTimeInterval {
-		var time = dataController.totalTime + dataController.timeForToday - NSTimeInterval(dataController.numDays) * eightHours
+	public func getTodayBalance() -> TimeInterval {
+		var time = dataController.totalTime + dataController.timeForToday - TimeInterval(dataController.numDays) * eightHours
 		if isOutside == false {
-			time += timeProvider.getCurrentTime().timeIntervalSinceDate(dataController.timeArrived)
+			time += timeProvider.getCurrentTime().timeIntervalSince(dataController.timeArrived)
 		}
 		
 		return time
@@ -73,8 +73,8 @@ public class TimeController {
 		
 		var prevNumDays = dataController.numDays
 		if dataController.lastDay == timeProvider.getCurrentDay() {
-			prevNumDays--
+			prevNumDays -= 1
 		}
-		prevBalance = dataController.totalTime - NSTimeInterval(prevNumDays) * eightHours
+		prevBalance = dataController.totalTime - TimeInterval(prevNumDays) * eightHours
 	}
 }

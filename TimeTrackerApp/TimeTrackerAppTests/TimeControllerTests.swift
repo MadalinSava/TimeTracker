@@ -34,12 +34,12 @@ class TimeControllerTests: XCTestCase {
 	func testEnterExit() {
 		let tp = CustomTimeProvider()
 		
-		let dateComps = NSDateComponents()
+		var dateComps = DateComponents()
 		dateComps.day = 15
 		dateComps.hour = 9
 		dateComps.month = 1
 		dateComps.year = 2016
-		tp.currentTime = NSCalendar.currentCalendar().dateFromComponents(dateComps)!
+        tp.currentTime = Calendar.current.date(from: dateComps)!
 		
 		let dc = DummyDataController()
 		dc.numDays = 1
@@ -56,64 +56,64 @@ class TimeControllerTests: XCTestCase {
 		XCTAssertEqual(tc.getTodayBalance(), -8.h - 5.m)
 		
 		// stay 5 minutes, check today balance
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(5.m)
+		tp.currentTime = tp.currentTime.addingTimeInterval(5.m)
 		XCTAssertEqual(tc.getTodayBalance(), -8.h)
 		
 		tc.exit()
 		XCTAssertEqual(tc.getTodayBalance(), -8.h)
 		
 		// stay 1 hour outside, then enter
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(1.h)
+		tp.currentTime = tp.currentTime.addingTimeInterval(1.h)
 		tc.enter()
-		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.dateByAddingTimeInterval(8.h - 5.m))
-		XCTAssertEqual(tc.getFullTime(), tp.currentTime.dateByAddingTimeInterval(8.h))
+		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.addingTimeInterval(8.h - 5.m))
+		XCTAssertEqual(tc.getFullTime(), tp.currentTime.addingTimeInterval(8.h))
 		
 		tc.exit()
 		XCTAssertEqual(tc.getTodayBalance(), -8.h)
 		tc.enter()
 		
 		// stay 8 hours inside
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(8.h)
+		tp.currentTime = tp.currentTime.addingTimeInterval(8.h)
 		XCTAssertEqual(tc.getTodayBalance(), 0.m)
-		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.dateByAddingTimeInterval(-5.m))
+		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.addingTimeInterval(-5.m))
 		XCTAssertEqual(tc.getFullTime(), tp.currentTime)
 		
 		tc.exit()
 		XCTAssertEqual(tc.getTodayBalance(), 0.m)
 		
 		// stay 10 minutes outside, then enter
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(10.m)
+		tp.currentTime = tp.currentTime.addingTimeInterval(10.m)
 		tc.enter()
 		XCTAssertEqual(tc.prevBalance, -5.m)
 		
 		// stay 20 minutes inside
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(20.m)
+		tp.currentTime = tp.currentTime.addingTimeInterval(20.m)
 		XCTAssertEqual(tc.getTodayBalance(), 20.m)
 		
 		tc.exit()
 		
 		// next day
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(1.d)
+		tp.currentTime = tp.currentTime.addingTimeInterval(1.d)
 		tc.enter()
 		XCTAssertEqual(tc.prevBalance, 20.m)
 		XCTAssertEqual(tc.getTodayBalance(), -8.h + 20.m)
-		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.dateByAddingTimeInterval(8.h))
-		XCTAssertEqual(tc.getFullTime(), tp.currentTime.dateByAddingTimeInterval(8.h - 20.m))
+		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.addingTimeInterval(8.h))
+		XCTAssertEqual(tc.getFullTime(), tp.currentTime.addingTimeInterval(8.h - 20.m))
 		
 		tc = TimeController(dataControllerAbstract: dc, timeProviderAbstract: tp)
 		XCTAssertEqual(tc.isOutside, false)
 		XCTAssertEqual(tc.prevBalance, 20.m)
 		XCTAssertEqual(tc.getTodayBalance(), -8.h + 20.m)
-		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.dateByAddingTimeInterval(8.h))
-		XCTAssertEqual(tc.getFullTime(), tp.currentTime.dateByAddingTimeInterval(8.h - 20.m))
+		XCTAssertEqual(tc.getRegularTime(), tp.currentTime.addingTimeInterval(8.h))
+		XCTAssertEqual(tc.getFullTime(), tp.currentTime.addingTimeInterval(8.h - 20.m))
 		
 		// stay 8 hours inside
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(8.h)
+		tp.currentTime = tp.currentTime.addingTimeInterval(8.h)
 		tc.exit()
 		XCTAssertEqual(tc.getTodayBalance(), 20.m)
 		
 		// previous day (new month)
-		tp.currentTime = tp.currentTime.dateByAddingTimeInterval(-2.d)
+		tp.currentTime = tp.currentTime.addingTimeInterval(-2.d)
 		tc = TimeController(dataControllerAbstract: dc, timeProviderAbstract: tp)
 		tc.enter()
 		XCTAssertEqual(tc.getTodayBalance(), -8.h)
@@ -121,10 +121,10 @@ class TimeControllerTests: XCTestCase {
 }
 
 private class DummyDataController: PDataControllerInternal {
-	var timeArrived: NSDate!
-	var timeLeft: NSDate!
-	var timeForToday: NSTimeInterval = 0
-	var totalTime: NSTimeInterval = 0
+	var timeArrived: Date!
+	var timeLeft: Date!
+	var timeForToday: TimeInterval = 0
+	var totalTime: TimeInterval = 0
 	var lastDay: Int = 0
 	var numDays: Int = 0
 	var isOutside: Bool = true
@@ -142,17 +142,17 @@ private class DummyDataController: PDataControllerInternal {
 
 private class CustomTimeProvider: PTimeProviderInternal {
 	
-	var currentTime: NSDate
+	var currentTime: Date
 	
 	func getCurrentDay() -> Int {
-		return NSCalendar.currentCalendar().component(.Day, fromDate: currentTime)
+		return Calendar.current.component(.day, from: currentTime)
 	}
 	
-	func getCurrentTime() -> NSDate {
+	func getCurrentTime() -> Date {
 		return currentTime
 	}
 	
 	init() {
-		currentTime = NSCalendar.currentCalendar().dateBySettingHour(8, minute: 0, second: 0, ofDate: NSDate(), options: NSCalendarOptions())!
+        currentTime = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
 	}
 }

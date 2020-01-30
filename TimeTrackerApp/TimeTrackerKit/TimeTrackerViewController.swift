@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class TimeTrackerViewController: UIViewController {
+open class TimeTrackerViewController: UIViewController {
 	
 	private var timeController: TimeController!
-	private let formatter = NSDateFormatter()
+	private let formatter = DateFormatter()
 	
 	private lazy var baseView: BaseView = { return self.view as! BaseView }()
 	
-	override public func viewDidLoad() {
+	override open func viewDidLoad() {
 		super.viewDidLoad()
 		
 		timeController = TimeController(dataControllerAbstract: DataController(), timeProviderAbstract: TimeProvider())
@@ -25,16 +25,16 @@ public class TimeTrackerViewController: UIViewController {
 		baseView.viewController = self
 		baseView.setupUI()
 		
-		baseView.enterExit.addTarget(self, action: "toggleState", forControlEvents: .TouchUpInside)
+        baseView.enterExit.addTarget(self, action: #selector(toggleState), for: .touchUpInside)
 	}
 	
-	override public func viewWillAppear(animated: Bool) {
+	override open func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
 		setup()
 	}
 	
-	override public func viewDidAppear(animated: Bool) {
+	override open func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		/*
@@ -53,7 +53,7 @@ public class TimeTrackerViewController: UIViewController {
 		})*/
 	}
 
-	override public func prepareForInterfaceBuilder() {
+	override open func prepareForInterfaceBuilder() {
 
 	}
 
@@ -82,8 +82,8 @@ public class TimeTrackerViewController: UIViewController {
 		baseView.prevBalanceView.time.text = formatTime(timeController.prevBalance)
 		baseView.currentBalanceView.time.text = formatTime(timeController.getTodayBalance())
 		
-		baseView.enterExit.setImage(UIImage(named: "Exit")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
-		baseView.enterExit.tintColor = UIColor.redColor()
+		baseView.enterExit.setImage(UIImage(named: "Exit")!.withRenderingMode(.alwaysTemplate), for: .normal)
+		baseView.enterExit.tintColor = UIColor.red
 	}
 	
 	private func setupOutside() {
@@ -92,15 +92,15 @@ public class TimeTrackerViewController: UIViewController {
 		baseView.prevBalanceView.time.text = "--:--"
 		baseView.currentBalanceView.time.text = formatTime(timeController.getTodayBalance())
 		
-		baseView.enterExit.setImage(UIImage(named: "Enter")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
-		baseView.enterExit.tintColor = UIColor.greenColor()
+		baseView.enterExit.setImage(UIImage(named: "Enter")!.withRenderingMode(.alwaysTemplate), for: .normal)
+		baseView.enterExit.tintColor = UIColor.green
 	}
 	
-	private func formatDate(date: NSDate) -> String {
-		return formatter.stringFromDate(date)
+	private func formatDate(_ date: Date) -> String {
+        return formatter.string(from: date)
 	}
 	
-	private func formatTime(seconds: NSTimeInterval) -> String {
+	private func formatTime(_ seconds: TimeInterval) -> String {
 		let minutes = Int(seconds) / 60
 		return String(minutes / 60) + ":" + (NSString(format:"%02d", abs(minutes) % 60) as String)
 	}

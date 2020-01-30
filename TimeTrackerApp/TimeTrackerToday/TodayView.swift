@@ -15,10 +15,10 @@ class TodayView: BaseView {
 	override func setupUI() {
 		setupTimeDisplay()
 		
-		displayView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: defaultSpacing)
-		displayView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: enterExit, withOffset: -defaultSpacing)
+		displayView.autoPinEdge(toSuperviewEdge: .bottom, withInset: defaultSpacing)
+		displayView.autoPinEdge(.trailing, toEdge: .leading, ofView: enterExit, withOffset: -defaultSpacing)
 		
-		enterExit.autoPinEdgeToSuperviewEdge(.Trailing, withInset: defaultSpacing)
+		enterExit.autoPinEdge(toSuperviewEdge: .trailing, withInset: defaultSpacing)
 		enterExit.autoAlignAxisToSuperviewAxis(.Horizontal)
 	}
 	
@@ -27,7 +27,7 @@ class TodayView: BaseView {
 		
 		let bundle = NSBundle(forClass: self.dynamicType)
 		let image = UIImage(named: "Enter", inBundle: bundle, compatibleWithTraitCollection: self.traitCollection)
-		enterExit.setImage(image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
-		enterExit.tintColor = UIColor.greenColor()
+		enterExit.setImage(image!.withRenderingMode(.alwaysTemplate), for: .normal)
+		enterExit.tintColor = UIColor.green
 	}
 }

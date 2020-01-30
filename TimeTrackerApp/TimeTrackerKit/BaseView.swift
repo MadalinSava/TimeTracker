@@ -11,7 +11,7 @@ import PureLayout
 
 public let defaultSpacing: CGFloat = 8.0
 
-public class BaseView: UIView {
+open class BaseView: UIView {
 	
 	@IBInspectable var textColor: UIColor!
 	
@@ -24,52 +24,52 @@ public class BaseView: UIView {
 	
 	var viewController: UIViewController!
 	
-	override public func prepareForInterfaceBuilder() {
+	override open func prepareForInterfaceBuilder() {
 		setupUI()
 	}
 	
-	public func setupUI() {
+	open func setupUI() {
 		assertionFailure()
 	}
 	
 	public func setupTimeDisplay() {
-		//backgroundColor = UIColor.brownColor()
+		//backgroundColor = UIColor.brown
 		
 		displayView = UIView()
 		addSubview(displayView)
 		
 		if viewController != nil {
-			displayView.autoPinToTopLayoutGuideOfViewController(viewController, withInset: defaultSpacing)
+            displayView.autoPin(toTopLayoutGuideOf: viewController, withInset: defaultSpacing)
 		} else {
-			displayView.autoPinEdgeToSuperviewEdge(.Top, withInset: defaultSpacing)// +20
+			displayView.autoPinEdge(toSuperviewEdge: .top, withInset: defaultSpacing)// +20
 		}
-		displayView.autoPinEdgeToSuperviewEdge(.Leading, withInset: defaultSpacing)
+		displayView.autoPinEdge(toSuperviewEdge: .leading, withInset: defaultSpacing)
 		
 		fullTimeView = TimeDisplay(name: "Full time", textColor: textColor)
 		displayView.addSubview(fullTimeView)
-		fullTimeView.autoPinEdgeToSuperviewEdge(.Top)
-		fullTimeView.autoPinEdgeToSuperviewEdge(.Leading)
-		fullTimeView.autoPinEdgeToSuperviewEdge(.Trailing)
+		fullTimeView.autoPinEdge(toSuperviewEdge: .top)
+		fullTimeView.autoPinEdge(toSuperviewEdge: .leading)
+		fullTimeView.autoPinEdge(toSuperviewEdge: .trailing)
 		
 		regularTimeView = TimeDisplay(name: "Regular time", textColor: textColor)
 		displayView.addSubview(regularTimeView)
-		regularTimeView.autoPinEdge(.Top, toEdge: .Bottom, ofView: fullTimeView, withOffset: defaultSpacing)
-		regularTimeView.autoPinEdgeToSuperviewEdge(.Leading)
-		regularTimeView.autoPinEdgeToSuperviewEdge(.Trailing)
+        regularTimeView.autoPinEdge(.top, to: .bottom, of: fullTimeView, withOffset: defaultSpacing)
+		regularTimeView.autoPinEdge(toSuperviewEdge: .leading)
+		regularTimeView.autoPinEdge(toSuperviewEdge: .trailing)
 		
 		prevBalanceView = TimeDisplay(name: "Previous balance", textColor: textColor)
 		displayView.addSubview(prevBalanceView)
-		prevBalanceView.autoPinEdge(.Top, toEdge: .Bottom, ofView: regularTimeView, withOffset: defaultSpacing)
-		prevBalanceView.autoPinEdgeToSuperviewEdge(.Leading)
-		prevBalanceView.autoPinEdgeToSuperviewEdge(.Trailing)
+        prevBalanceView.autoPinEdge(.top, to: .bottom, of: regularTimeView, withOffset: defaultSpacing)
+		prevBalanceView.autoPinEdge(toSuperviewEdge: .leading)
+		prevBalanceView.autoPinEdge(toSuperviewEdge: .trailing)
 		
 		currentBalanceView = TimeDisplay(name: "Current balance", textColor: textColor)
 		displayView.addSubview(currentBalanceView)
-		currentBalanceView.autoPinEdge(.Top, toEdge: .Bottom, ofView: prevBalanceView, withOffset: defaultSpacing)
-		currentBalanceView.autoPinEdgeToSuperviewEdge(.Leading)
-		currentBalanceView.autoPinEdgeToSuperviewEdge(.Trailing)
+        currentBalanceView.autoPinEdge(.top, to: .bottom, of: prevBalanceView, withOffset: defaultSpacing)
+		currentBalanceView.autoPinEdge(toSuperviewEdge: .leading)
+		currentBalanceView.autoPinEdge(toSuperviewEdge: .trailing)
 		
-		currentBalanceView.autoPinEdgeToSuperviewEdge(.Bottom)
+		currentBalanceView.autoPinEdge(toSuperviewEdge: .bottom)
 		
 		enterExit = UIButton()
 		addSubview(enterExit)

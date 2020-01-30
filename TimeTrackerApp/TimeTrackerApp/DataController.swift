@@ -12,10 +12,10 @@ public protocol PDataController: class {
 }
 
 protocol PDataControllerInternal: PDataController {
-	var timeArrived: NSDate! {get set}
-	var timeLeft: NSDate! {get set}
-	var timeForToday: NSTimeInterval {get set}
-	var totalTime: NSTimeInterval {get set}
+	var timeArrived: Date! {get set}
+	var timeLeft: Date! {get set}
+	var timeForToday: TimeInterval {get set}
+	var totalTime: TimeInterval {get set}
 	var lastDay: Int {get set}
 	var numDays: Int {get set}
 	var isOutside: Bool {get set}
@@ -26,14 +26,14 @@ protocol PDataControllerInternal: PDataController {
 
 public class DataController: PDataControllerInternal {
 	
-	var timeArrived: NSDate! {
+	var timeArrived: Date! {
 		didSet {
 			userDefaults.setValue(timeArrived, forKey: "timeArrived")
 			registerForSave()
 		}
 	}
 	
-	var timeLeft: NSDate! {
+	var timeLeft: Date! {
 		didSet {
 			userDefaults.setValue(timeLeft, forKey: "timeLeft")
 			registerForSave()
@@ -78,7 +78,7 @@ public class DataController: PDataControllerInternal {
 	private static var instance: DataController?
 	
 	private var pendingSave = false
-	private var userDefaults: NSUserDefaults!
+	private var userDefaults: UserDefaults!
 	
 	public init!() {
 		guard DataController.instance == nil else {
@@ -86,7 +86,7 @@ public class DataController: PDataControllerInternal {
 			return nil
 		}
 		
-		userDefaults = NSUserDefaults(suiteName: "group.ms.TimeTracker")
+		userDefaults = UserDefaults(suiteName: "group.ms.TimeTracker")
 		
 		reload()
 		
@@ -94,14 +94,14 @@ public class DataController: PDataControllerInternal {
 	}
 	
 	public func reload() {
-		timeArrived = userDefaults.valueForKey("timeArrived") as? NSDate
-		timeLeft = userDefaults.valueForKey("timeLeft") as? NSDate
-		timeForToday = userDefaults.doubleForKey("timeForToday")
-		totalTime = userDefaults.doubleForKey("totalTime")// - 5.hours - 35.minutes
-		lastDay = userDefaults.integerForKey("lastDay")
-		numDays = userDefaults.integerForKey("numDays")
-		if userDefaults.valueForKey("isOutside") != nil {
-			isOutside = userDefaults.boolForKey("isOutside")
+        timeArrived = userDefaults.value(forKey: "timeArrived") as? Date
+		timeLeft = userDefaults.value(forKey: "timeLeft") as? Date
+		timeForToday = userDefaults.double(forKey: "timeForToday")
+		totalTime = userDefaults.double(forKey: "totalTime")// - 5.hours - 35.minutes
+		lastDay = userDefaults.integer(forKey: "lastDay")
+		numDays = userDefaults.integer(forKey: "numDays")
+		if userDefaults.value(forKey: "isOutside") != nil {
+			isOutside = userDefaults.bool(forKey: "isOutside")
 		}
 		
 		/*totalTime = 0
@@ -127,7 +127,7 @@ public class DataController: PDataControllerInternal {
 		}
 		
 		pendingSave = true
-		NSOperationQueue.mainQueue().addOperationWithBlock(save)
+        OperationQueue.main.addOperation(save)
 	}
 	
 	private func save() {

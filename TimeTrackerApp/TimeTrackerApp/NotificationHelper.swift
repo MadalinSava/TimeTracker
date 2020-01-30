@@ -10,11 +10,11 @@ typealias SimpleBlock = () -> Void
 class Notification {
 	private var selector: SimpleBlock
 
-	init(selector: SimpleBlock) {
+	init(selector: @escaping SimpleBlock) {
 		self.selector = selector
 	}
 
-	private func select() {
+    @objc fileprivate func select() {
 		selector()
 	}
 }
@@ -22,9 +22,9 @@ class Notification {
 class NotificationHelper {
 	static let instance = NotificationHelper()
 
-	func addObserver(block: SimpleBlock, forNotification notification: String, withObject object: AnyObject? = nil) {
+	func addObserver(block: @escaping SimpleBlock, forNotification notification: String, withObject object: AnyObject? = nil) {
 		let notif = Notification(selector: block)
-		NSNotificationCenter.defaultCenter().addObserver(notif, selector: "select:", name: notification, object: object)
+        NotificationCenter.default.addObserver(notif, selector: #selector(Notification.select), name: NSNotification.Name(rawValue: notification), object: object)
 	}
 
 	func removeObserver() {

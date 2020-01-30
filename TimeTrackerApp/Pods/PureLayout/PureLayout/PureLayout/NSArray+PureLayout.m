@@ -412,7 +412,7 @@
     NSUInteger numberOfViews = [views count];
     ALView *commonSuperview = [views al_commonSuperviewOfViews];
     ALView *previousView = nil;
-    for (NSUInteger i = 0; i < numberOfViews; i++) {
+    for (NSUInteger i = 0; i < numberOfViews; i += 1) {
         ALView *view = shouldFlipOrder ? views[numberOfViews - i - 1] : views[i];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [constraints addObject:[view autoSetDimension:fixedDimension toSize:size]];
@@ -477,7 +477,7 @@
     NSUInteger numberOfViews = 0;
     for (id object in self) {
         if ([object isKindOfClass:[ALView class]]) {
-            numberOfViews++;
+            numberOfViews += 1;
             if (numberOfViews >= minimumNumberOfViews) {
                 return YES;
             }

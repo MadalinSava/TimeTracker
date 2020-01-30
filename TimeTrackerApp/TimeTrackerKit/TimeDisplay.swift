@@ -25,28 +25,28 @@ public class TimeDisplay: UIView {
 		
 		time = newLabel(textColor)
 		time.text = "HH:mm"
-		time.textAlignment = .Right
+        time.textAlignment = .right
 		
-		text.autoPinEdgeToSuperviewEdge(.Top)
-		text.autoPinEdgeToSuperviewEdge(.Leading)
-		text.autoPinEdgeToSuperviewEdge(.Bottom)
+        text.autoPinEdge(toSuperviewEdge: .top)
+		text.autoPinEdge(toSuperviewEdge: .leading)
+		text.autoPinEdge(toSuperviewEdge: .bottom)
 		
-		time.autoPinEdgeToSuperviewEdge(.Top)
-		time.autoPinEdgeToSuperviewEdge(.Trailing)
-		time.autoPinEdgeToSuperviewEdge(.Bottom)
+		time.autoPinEdge(toSuperviewEdge: .top)
+		time.autoPinEdge(toSuperviewEdge: .trailing)
+		time.autoPinEdge(toSuperviewEdge: .bottom)
 		
-		//time.autoPinEdge(.Leading, toEdge: .Trailing, ofView: text)
+		//time.autoPinEdge(.leading, toEdge: .trailing, ofView: text)
 	}
 
 	required public init?(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func newLabel(color: UIColor) -> UILabel {
+	private func newLabel(_ color: UIColor) -> UILabel {
 		
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = UIFont.systemFontOfSize(20)
+        label.font = UIFont.systemFont(ofSize: 20)
 		label.textColor = color
 		label.translatesAutoresizingMaskIntoConstraints = false
 		addSubview(label)

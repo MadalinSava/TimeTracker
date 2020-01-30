@@ -13,17 +13,17 @@ import TimeTrackerKit
 class ViewController: TimeTrackerViewController {
 	
 	private var timeController: TimeController!
-	private let formatter = NSDateFormatter()
+	private let formatter = DateFormatter()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
 
-	override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 	}
 }
