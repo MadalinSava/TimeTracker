@@ -22,7 +22,7 @@ public class TimeController {
 	
 	public func enter() {
 		let currentDay = timeProvider.getCurrentDay()
-		if dataController.lastDay >= currentDay {
+		if dataController.lastDay > currentDay {
 			dataController.reset()
 			dataController.lastDay = currentDay
 			dataController.numDays = 1
