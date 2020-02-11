@@ -29,7 +29,7 @@ public class TimeController {
 		} else if dataController.lastDay < currentDay {
 			dataController.totalTime += dataController.timeForToday
 			dataController.timeForToday = 0
-			prevBalance = dataController.totalTime - TimeInterval(dataController.numDays) * eightHours
+			prevBalance = dataController.totalTime + TimeInterval(dataController.numDays) * eightHours
 			
 			dataController.lastDay = currentDay
 			dataController.numDays += 1
