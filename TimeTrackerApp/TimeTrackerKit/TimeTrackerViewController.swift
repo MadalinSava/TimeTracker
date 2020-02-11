@@ -102,6 +102,6 @@ open class TimeTrackerViewController: UIViewController {
 	
 	private func formatTime(_ seconds: TimeInterval) -> String {
 		let minutes = Int(seconds) / 60
-		return String(minutes / 60) + ":" + (NSString(format:"%02d", abs(minutes) % 60) as String)
+		return String(minutes / 60) + ":" + (NSString(format:"%03d", abs(minutes) % 60) as String)
 	}
 }
